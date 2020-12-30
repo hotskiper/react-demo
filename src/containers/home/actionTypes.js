@@ -1,0 +1,2 @@
+export const GET_TEXT = 'GET_TEXT';
+export const SET_SIDEBAR_COLLAPSE = 'SET_SIDEBAR_COLLAPSE';
