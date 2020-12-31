@@ -102,21 +102,37 @@ function App(props) {
             }}
           >
             <Switch>
-              <Route path="/popular">
+              <Route
+                path="/popular"
+                render={(nexState, replace) => {
+                  console.log(888, nexState)
+                }}
+              >
                 <div>1</div>
               </Route>
-              <Route path="/resent">
-                <div>2</div>
+              <Route
+                path="/resent"
+                render={(nexState, replace) => {
+                  console.log(888, nexState)
+                  return <div>2</div>
+                }}
+              >
               </Route>
-              <Route path="/test">
-                <Test text={props.textData} />
+              <Route
+                path="/test"
+                render={(nexState, replace) => {
+                  console.log(888, nexState)
+                  return <Test text={props.textData} />;
+                }}
+              >
+                
               </Route>
             </Switch>
           </Content>
         </Layout>
       </Layout>
     </Layout>
-  );
+  )
 }
 
 function mapStateToProps(state) {
