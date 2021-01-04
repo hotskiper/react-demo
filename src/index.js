@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './store';
 import './index.css';
 import 'antd/dist/antd.css';
-import App from './containers/home/App';
+import App from './containers';
 import reportWebVitals from './reportWebVitals';
 import './mock';
 

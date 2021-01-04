@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useLocation, Switch, Route, NavLink} from 'react-router-dom';
 import { getText, setSidebarCollapse } from './actions';
-import Test from '@/components/Test';
 import { Layout, Menu } from 'antd';
-import './App.css';
+import Test from '@/components/Test';
+import './index.css';
 import { useEffect, useRef } from 'react';
 
 const { Header, Content, Sider } = Layout;
@@ -24,7 +24,6 @@ function App(props) {
       t.current.getText();
     }
     // })()
-    /// eslint-disable-next-line
   }, [pathname]);
   const onCollapse = () => {
     props.setSidebarCollapse(!props.collapsed);
@@ -80,14 +79,14 @@ function App(props) {
                 Popular
               </NavLink>
             </Menu.Item>
-            <Menu.Item key="/resent">
-              <NavLink to="/resent" activeClassName="selected">
-                Resent
+            <Menu.Item key="/recent">
+              <NavLink to="/recent" activeClassName="selected">
+                Recent
               </NavLink>
             </Menu.Item>
-            <Menu.Item key="/test">
-              <NavLink to="/test" activeClassName="selected">
-                test
+            <Menu.Item key="/home">
+              <NavLink to="/home" activeClassName="selected">
+                Home
               </NavLink>
             </Menu.Item>
           </Menu>
