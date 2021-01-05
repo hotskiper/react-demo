@@ -6,6 +6,7 @@ import { Layout, Menu } from 'antd';
 import Test from '@/components/Test';
 import './index.css';
 import { useEffect, useRef } from 'react';
+import routerMap from '@/router/routerMap'
 
 const { Header, Content, Sider } = Layout;
 
@@ -13,6 +14,7 @@ function App(props) {
   // const { location } = props;
   
   const {pathname} = useLocation();
+  const routeArr = routerMap.find((route) => route.path === '/home').routes;
   const t = useRef();
   t.current = props
   useEffect(() => {
@@ -75,12 +77,12 @@ function App(props) {
             onClick={onSideClick}
           >
             <Menu.Item key="/popular">
-              <NavLink to="/popular" activeClassName="selected">
+              <NavLink to="/home/popular" activeClassName="selected">
                 Popular
               </NavLink>
             </Menu.Item>
             <Menu.Item key="/recent">
-              <NavLink to="/recent" activeClassName="selected">
+              <NavLink to="/home/recent" activeClassName="selected">
                 Recent
               </NavLink>
             </Menu.Item>
@@ -101,31 +103,9 @@ function App(props) {
             }}
           >
             <Switch>
-              <Route
-                path="/popular"
-                render={(nexState, replace) => {
-                  console.log(888, nexState)
-                }}
-              >
-                <div>1</div>
-              </Route>
-              <Route
-                path="/resent"
-                render={(nexState, replace) => {
-                  console.log(888, nexState)
-                  return <div>2</div>
-                }}
-              >
-              </Route>
-              <Route
-                path="/test"
-                render={(nexState, replace) => {
-                  console.log(888, nexState)
-                  return <Test text={props.textData} />;
-                }}
-              >
-                
-              </Route>
+              {routeArr.map((route, i) => (
+                <Route key={i} {...route} />
+              ))}
             </Switch>
           </Content>
         </Layout>
