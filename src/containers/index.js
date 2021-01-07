@@ -1,22 +1,22 @@
 import { Switch, Route, Redirect } from 'react-router-dom'
-// import FrontendAuth from '@/router/frontendAuth'
-import routerMap from '@/router/routerMap'
-import { ProvideAuth, PrivateRoute } from '@/config/use-auth'
+import React from 'react';
+import routes from '@/router/routerConfig'
+import RouterGuard from '@/router/routerGuard'
 
 function App(){
   return (
-    // <Switch>
-    //   <FrontendAuth routerConfig={routerMap} />
-    // </Switch>
-    <ProvideAuth>
       <Switch>
-        {routerMap.map((route, i) => (
-          route.auth ?
-          (<PrivateRoute key={i} {...route} />) : (<Route key={i} {...route}/>)
+        {routes.map((route, i) => (
+          <Route
+            key={i}
+            path={route.path}
+            render={() => {
+              return <RouterGuard {...route} />
+            }}
+          />
         ))}
-        <Redirect to="/home" />
+        {/* <Redirect to="/home" /> */}
       </Switch>
-    </ProvideAuth>
   )
 }
 

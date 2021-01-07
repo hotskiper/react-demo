@@ -3,10 +3,11 @@ import { bindActionCreators } from 'redux';
 import { useLocation, Switch, Route, NavLink} from 'react-router-dom';
 import { getText, setSidebarCollapse } from './actions';
 import { Layout, Menu } from 'antd';
-import Test from '@/components/Test';
 import './index.css';
 import { useEffect, useRef } from 'react';
-import routerMap from '@/router/routerMap'
+import routerConfig from '@/router/routerConfig';
+import RouterGuard from '@/router/routerGuard';
+import React from 'react'
 
 const { Header, Content, Sider } = Layout;
 
@@ -14,7 +15,7 @@ function App(props) {
   // const { location } = props;
   
   const {pathname} = useLocation();
-  const routeArr = routerMap.find((route) => route.path === '/home').routes;
+  const routeArr = routerConfig.find((route) => route.path === '/home').routes
   const t = useRef();
   t.current = props
   useEffect(() => {
@@ -102,11 +103,19 @@ function App(props) {
               minHeight: 280,
             }}
           >
-            <Switch>
-              {routeArr.map((route, i) => (
-                <Route key={i} {...route} />
-              ))}
-            </Switch>
+            
+              <Switch>
+                {routeArr.map((route, i) => (
+                  <Route
+                    key={i}
+                    path={route.path}
+                    render={() => {
+                      return <RouterGuard {...route} />
+                    }}
+                  />
+                ))}
+              </Switch>
+            
           </Content>
         </Layout>
       </Layout>
